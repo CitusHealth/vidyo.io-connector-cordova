@@ -35,6 +35,15 @@ VidyoIOPlugin.prototype.launch = function(args) {
     exec(nativeResponseCallback, nativeErrorCallback, "VidyoIOPlugin", "launchVidyoIO", args);
 }
 
+VidyoIOPlugin.prototype.launchVidyoIO = function(
+    successCallBack,
+    errorCallBack,
+    args
+  ) {
+    console.log("called plugin launchVidyoIO function......................");
+    exec(successCallBack, errorCallBack, "VidyoIOPlugin", "launchVidyoIO", args);
+  };
+
 /**
  * Disconnect from the conference
  */
@@ -42,7 +51,10 @@ VidyoIOPlugin.prototype.disconnect = function() {
     console.log("Trigger disconnect on native side.");
     exec(function(){}, nativeErrorCallback, "VidyoIOPlugin", "disconnect", null);
 }
-
+VidyoIOPlugin.prototype.destroy = function(successCallBack, errorCallBack) {
+  console.log("called plugin destroye function......................");
+  exec(successCallBack, errorCallBack, "VidyoIOPlugin", "destroy");
+};
 /**
  * Wrap up the plugin screen and release the connector
  */
@@ -50,5 +62,22 @@ VidyoIOPlugin.prototype.release = function() {
     console.log("Trigger release on native side.");
     exec(function(){}, nativeErrorCallback, "VidyoIOPlugin", "release", null);
 }
-
+plugin.prototype.close = function(successCallBack, errorCallBack) {
+    console.log("called plugin close function......................");
+    exec(successCallBack, errorCallBack, "VidyoIOPlugin", "closeVidyo");
+  };
+  
+  plugin.prototype.getPermission = function(successCallBack, errorCallBack) {
+    console.log("called plugin prmission function......................");
+    exec(successCallBack, errorCallBack, "VidyoIOPlugin", "getPermission");
+  };
+  
+  plugin.prototype.showToast = function(successCallBack, errorCallBack, args) {
+    console.log("toast called");
+    exec(successCallBack, errorCallBack, "VidyoIOPlugin", "showToast", args);
+  };
+  
+  plugin.prototype.showAlert = function(successCallBack, errorCallBack, args) {
+    exec(successCallBack, errorCallBack, "VidyoIOPlugin", "showAlert", args);
+  };
 module.exports = new VidyoIOPlugin();

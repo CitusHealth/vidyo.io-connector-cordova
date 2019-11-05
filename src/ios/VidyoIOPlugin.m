@@ -106,6 +106,48 @@
     self.vidyoViewController.plugin = nil;
     self.vidyoViewController = nil;
 }
+- (void)closeVidyo:(CDVInvokedUrlCommand *)command {
+    [self.vidyoViewController close];
+    [self.vidyoViewController dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)showToast:(CDVInvokedUrlCommand *)command {
+    NSLog(@"%@",[command.arguments objectAtIndex:0]);
+    NSString* message = [command.arguments objectAtIndex:0];
+    
+    UIAlertController *toast =[UIAlertController alertControllerWithTitle:nil
+                                                                  message:message
+                                                           preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    [self.vidyoViewController presentViewController:toast animated:YES completion:nil];
+    
+    int duration = 3; // in seconds
 
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [toast dismissViewControllerAnimated:YES completion:nil];
+    });
+}
+
+- (void)showAlert:(CDVInvokedUrlCommand *)command {
+    NSString* title = [command.arguments objectAtIndex:0];
+    NSString* message = [command.arguments objectAtIndex:1];
+    UIAlertController *toast =[UIAlertController alertControllerWithTitle:title
+                                                                  message:message
+                                                           preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"CANCEL" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+                         {
+                             //BUTTON OK CLICK EVENT
+                             [self.vidyoViewController close];
+                             [self.vidyoViewController dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"WAIT" style:UIAlertActionStyleCancel handler:nil];
+    [toast addAction:cancel];
+    [toast addAction:ok];
+    
+    
+    [self.vidyoViewController presentViewController:toast animated:YES completion:nil];
+
+}
 @end
 

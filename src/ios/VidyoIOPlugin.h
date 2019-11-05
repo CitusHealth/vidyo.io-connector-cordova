@@ -13,6 +13,10 @@
 - (void)disconnect:(CDVInvokedUrlCommand *)command;
 - (void)release:(CDVInvokedUrlCommand *)command;
 
+- (void)showToast:(CDVInvokedUrlCommand *)command;
+- (void)showAlert:(CDVInvokedUrlCommand *)command;
+- (void)closeVidyo:(CDVInvokedUrlCommand *)command;
+
 - (void)passConnectEvent:(NSString*)event reason: (NSString*)reason;
 - (void)passDeviceStateEvent:(NSString*)event muted: (NSString*)muted;
 
