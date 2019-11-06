@@ -62,22 +62,22 @@ VidyoIOPlugin.prototype.release = function() {
     console.log("Trigger release on native side.");
     exec(function(){}, nativeErrorCallback, "VidyoIOPlugin", "release", null);
 }
-plugin.prototype.close = function(successCallBack, errorCallBack) {
+VidyoIOPlugin.prototype.close = function(successCallBack, errorCallBack) {
     console.log("called plugin close function......................");
     exec(successCallBack, errorCallBack, "VidyoIOPlugin", "closeVidyo");
   };
   
-  plugin.prototype.getPermission = function(successCallBack, errorCallBack) {
+  VidyoIOPlugin.prototype.getPermission = function(successCallBack, errorCallBack) {
     console.log("called plugin prmission function......................");
     exec(successCallBack, errorCallBack, "VidyoIOPlugin", "getPermission");
   };
   
-  plugin.prototype.showToast = function(successCallBack, errorCallBack, args) {
+  VidyoIOPlugin.prototype.showToast = function(successCallBack, errorCallBack, args) {
     console.log("toast called");
     exec(successCallBack, errorCallBack, "VidyoIOPlugin", "showToast", args);
   };
   
-  plugin.prototype.showAlert = function(successCallBack, errorCallBack, args) {
+  VidyoIOPlugin.prototype.showAlert = function(successCallBack, errorCallBack, args) {
     exec(successCallBack, errorCallBack, "VidyoIOPlugin", "showAlert", args);
   };
 module.exports = new VidyoIOPlugin();
